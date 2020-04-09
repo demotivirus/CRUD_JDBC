@@ -69,4 +69,15 @@ public class UserDao {
         }
         return users;
     }
+
+    public void deleteUser(Long id) {
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM users WHERE id=?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println("User " + id + " delete");
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }

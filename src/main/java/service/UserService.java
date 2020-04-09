@@ -31,4 +31,9 @@ public class UserService {
         userDao = new UserDao();
         return userDao.getAll();
     }
+
+    public void deleteUser(Long id) {
+        userDao = new UserDao();
+        userDao.deleteUser(id);
+    }
 }
