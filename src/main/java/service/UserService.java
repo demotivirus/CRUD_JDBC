@@ -1,7 +1,9 @@
 package service;
 
 import dao.UserDao;
-import models.User;
+import model.User;
+
+import java.util.List;
 
 public class UserService {
     private static UserService userService;
@@ -18,5 +20,15 @@ public class UserService {
     public void addUser(User user) {
         userDao = new UserDao();
         userDao.addUser(user);
+    }
+
+    public User getUser(long id){
+        userDao = new UserDao();
+        return userDao.getUser(id);
+    }
+
+    public List<User> getAll() {
+        userDao = new UserDao();
+        return userDao.getAll();
     }
 }

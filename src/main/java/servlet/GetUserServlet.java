@@ -10,23 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/addUser")
-public class AddUserServlet extends HttpServlet {
+@WebServlet("/getUser")
+public class GetUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("addUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("getUser.jsp").forward(req, resp);
     }
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        User user = new User(
-                req.getParameter("name"),
-                req.getParameter("password"),
-                Integer.valueOf(req.getParameter("age")));
+        long id = Long.parseLong(req.getParameter("id"));
 
         UserService userService = UserService.getInstance();
-        userService.addUser(user);
-        req.setAttribute("user", user);
-        resp.setStatus(200);
-        req.getRequestDispatcher("view.jsp").forward(req, resp);
+        User user = userService.getUser(id);
+
+        if(user!=null) {
+            req.setAttribute("user", user);
+            resp.setStatus(200);
+            req.getRequestDispatcher("view.jsp").forward(req, resp);
+        }
     }
 }
