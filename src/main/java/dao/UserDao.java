@@ -80,4 +80,23 @@ public class UserDao {
             ex.printStackTrace();
         }
     }
+
+    public void updateUser(User user) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("UPDATE users SET name = ?, password = ?, age = ? ")
+                .append("where id = ?");
+
+        try(PreparedStatement preparedStatement =
+                    connection.prepareStatement(sb.toString())) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setInt(3, user.getAge());
+            preparedStatement.setLong(4, user.getId());
+
+            preparedStatement.execute();
+            System.out.println(user + " update");
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
 }

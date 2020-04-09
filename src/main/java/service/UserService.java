@@ -36,4 +36,9 @@ public class UserService {
         userDao = new UserDao();
         userDao.deleteUser(id);
     }
+
+    public void updateUser(User user) {
+        userDao = new UserDao();
+        userDao.updateUser(user);
+    }
 }
